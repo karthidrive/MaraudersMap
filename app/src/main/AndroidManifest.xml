@@ -38,7 +38,13 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".MeterReadDueActivity"
+            android:label="@string/title_activity_meter_read_due" />
+        <activity
+            android:name=".PaymentDueActivity"
+            android:label="@string/title_activity_payment_due"></activity>
     </application>
 
 </manifest>

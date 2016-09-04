@@ -1,5 +1,7 @@
 package com.centrica.maraudersmap;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -36,16 +38,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-    private void initialView(){
-        imgMenu = (ImageButton)findViewById(R.id.imgmenu);
-        imgMenu.setOnClickListener(new View.OnClickListener(){
+    private void initialView() {
+        imgMenu = (ImageButton) findViewById(R.id.imgmenu);
+        imgMenu.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 showFilterPopup(view);
             }
         });
-        editSearchCus = (EditText)findViewById(R.id.sercustomer);
+        editSearchCus = (EditText) findViewById(R.id.sercustomer);
     }
 
     /**
@@ -83,10 +85,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.meter_read_dues:
-                        Toast.makeText(MapsActivity.this, "Keyword!", Toast.LENGTH_SHORT).show();
+                        launchActivity(MapsActivity.this,MeterReadDueActivity.class);
                         return true;
                     case R.id.payment_dues:
-                        Toast.makeText(MapsActivity.this, "Popularity!", Toast.LENGTH_SHORT).show();
+                        launchActivity(MapsActivity.this,PaymentDueActivity.class);
                         return true;
                     default:
                         return false;
@@ -96,6 +98,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Handle dismissal with: popup.setOnDismissListener(...);
         // Show the menu
         popup.show();
+    }
+
+    private void launchActivity(Context packageContext, Class<?> cls) {
+        Intent launchActivity = new Intent(packageContext, cls);
+        startActivity(launchActivity);
     }
 
     public static void setForceShowIcon(PopupMenu popupMenu) {
