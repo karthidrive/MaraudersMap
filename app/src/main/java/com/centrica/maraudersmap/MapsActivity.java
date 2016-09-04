@@ -9,13 +9,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.lang.reflect.Field;
@@ -67,9 +70,87 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         // Add a marker in Sydney and move the camera
-        LatLng home = new LatLng(51.493201, -0.158860);
-        mMap.addMarker(new MarkerOptions().position(home).title("John"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, 15f));
+        LatLng home1 = new LatLng(51.493201, -0.158860);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home1));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home1, 15f));
+
+        LatLng home2 = new LatLng(51.483201, -0.156860);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
+                .position(home2));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home2, 15f));
+
+        LatLng home3 = new LatLng(51.383201, -0.166860);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
+                .position(home3));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home3, 15f));
+
+
+        // Setting a custom info window adapter for the google map
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            // Use default InfoWindow frame
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            // Defines the contents of the InfoWindow
+            @Override
+            public View getInfoContents(Marker arg0) {
+
+                // Getting view from the layout file info_window_layout
+                View v = getLayoutInflater().inflate(R.layout.map_infowindow, null);
+
+                // Getting the position from the marker
+                LatLng latLng = arg0.getPosition();
+
+                // Getting reference to the TextView to set latitude
+                TextView tvLat = (TextView) v.findViewById(R.id.txtreaddate);
+
+                // Getting reference to the TextView to set longitude
+                TextView tvLng = (TextView) v.findViewById(R.id.txtmeterunits);
+
+                // Setting the latitude
+                tvLat.setText("01/08/2016");
+
+                // Setting the longitude
+                tvLng.setText("2153");
+
+                // Returning the view containing InfoWindow contents
+                return v;
+
+            }
+        });
+
+        // Adding and showing marker while touching the GoogleMap
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng arg0) {
+              /*  // Clears any existing markers from the GoogleMap
+               // googleMap.clear();
+
+                // Creating an instance of MarkerOptions to set position
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                // Setting position on the MarkerOptions
+                markerOptions.position(arg0);
+
+                // Animating to the currently touched position
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0));
+
+                // Adding marker on the GoogleMap
+                Marker marker = mMap.addMarker(markerOptions);
+
+                // Showing InfoWindow on the GoogleMap
+                marker.showInfoWindow();*/
+
+            }
+        });
     }
 
     // Display anchored popup menu based on view selected
