@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.setMessage("Authenticating...");
             progressDialog.show();*/
 
-            Intent mainMenu = new Intent(this,SuperActivity.class);
+            Intent mainMenu = new Intent(this,MapsActivity.class);
             startActivity(mainMenu);
             finish();
         }

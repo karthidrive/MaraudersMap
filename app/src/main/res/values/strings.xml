@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MaraudersMap</string>
+    <string name="app_name">British Gas</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
