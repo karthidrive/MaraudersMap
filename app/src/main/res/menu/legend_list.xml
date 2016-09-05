@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/normal_home"
+        android:icon="@mipmap/home_icon"
+        android:title="Normal Home"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/meter_due_home"
+        android:icon="@mipmap/red_home"
+        android:title="Meter Read Due Home"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/pay_due_home"
+        android:icon="@mipmap/pay_home"
+        android:title="Payment Due Home"
+        app:showAsAction="always|withText" />
+</menu>

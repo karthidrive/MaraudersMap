@@ -38,7 +38,7 @@
         android:title="clustering"
         app:showAsAction="always|withText" />
     <item
-        android:id="@+id/payment_dues1"
+        android:id="@+id/about"
         android:icon="@mipmap/about_icon"
         android:title="About"
         app:showAsAction="always|withText" />
