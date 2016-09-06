@@ -87,8 +87,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home2, 15f));
 
 
-
-
         LatLng home3 = new LatLng(51.383201, -0.166860);
         mMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
@@ -96,6 +94,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home3, 15f));
 
 
+        LatLng home4 = new LatLng(51.491597, -0.150766);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.user_icon))
+                .position(home4));
 
         // Setting a custom info window adapter for the google map
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
