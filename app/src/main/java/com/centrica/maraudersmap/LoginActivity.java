@@ -1,7 +1,11 @@
 package com.centrica.maraudersmap;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText;
     private EditText passEditText;
+    private int progressStatus = 0;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         // Address the email and password field
+        handler = new Handler();
         emailEditText = (EditText) findViewById(R.id.username);
         passEditText = (EditText) findViewById(R.id.password);
     }
@@ -43,18 +50,48 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (isValidEmail(email) && isValidPassword(pass)) {
-            // Validation Completed
-            /*final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                    R.style.AppTheme_NoTitle);
-            progressDialog.setIndeterminate(true);
-            progressDialog.setMessage("Authenticating...");
-            progressDialog.show();*/
 
-            Intent mainMenu = new Intent(this,MapsActivity.class);
-            startActivity(mainMenu);
-            finish();
+            final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setTitle("Please wait.");
+            pd.setMessage("Loading.........");
+            pd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
+            pd.setIndeterminate(false);
+            pd.show();
+            progressStatus = 0;
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(progressStatus < 100){
+                        // Update the progress status
+                        progressStatus +=1;
+                        // Try to sleep the thread for 20 milliseconds
+                        try{
+                            Thread.sleep(20);
+                        }catch(InterruptedException e){
+                            e.printStackTrace();
+                        }
+                        // Update the progress bar
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Update the progress status
+                                pd.setProgress(progressStatus);
+                                // If task execution completed
+                                if(progressStatus == 100){
+                                    // Dismiss/hide the progress dialog
+                                    pd.dismiss();
+                                    Intent mainMenu = new Intent(LoginActivity.this,MapsActivity.class);
+                                    startActivity(mainMenu);
+                                    finish();
+                                }
+                            }
+                        });
+                    }
+                }
+            }).start();
         }
-
     }
 
     // validating email id
