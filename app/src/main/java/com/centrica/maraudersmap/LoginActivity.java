@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
             pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pd.setTitle("Please wait.");
-            pd.setMessage("Loading.........");
+            pd.setMessage("Loading...");
             pd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
             pd.setIndeterminate(false);
             pd.show();
