@@ -1,18 +1,39 @@
 package com.centrica.maraudersmap;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -25,24 +46,181 @@ import com.google.maps.android.clustering.ClusterManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+import static com.github.mikephil.charting.utils.ColorTemplate.rgb;
+
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,SeekBar.OnSeekBarChangeListener,
+        OnChartValueSelectedListener {
 
     private GoogleMap mMap;
     private ImageButton imgMenu;
     private EditText editSearchCus;
     private ClusterManager<MyItem> mClusterManager;
+    Dialog dialog;
 
+    private PieChart mChart;
+
+    protected String[] mParties = new String[] {"Normal", "Meter Read Due", "Payment Due"};
+    protected Typeface mTfRegular;
+    protected Typeface mTfLight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_maps);
+
+        mTfRegular = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
+        mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
+
         initialView();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        showDialog();
+    }
+private void showDialog(){
+
+    // Create custom dialog object
+     dialog = new Dialog(MapsActivity.this);
+    // Include dialog.xml file
+    dialog.setContentView(R.layout.activity_health);
+    // Set dialog title
+    dialog.setTitle("Health Status");
+
+    // set values for custom dialog components - text, image and button
+   /* TextView text = (TextView) dialog.findViewById(R.id.textView);
+    text.setText("Custom dialog Android example.");*/
+
+
+
+    mChart = (PieChart) dialog.findViewById(R.id.chart1);
+    mChart.setUsePercentValues(true);
+    mChart.setDescription("");
+    mChart.setExtraOffsets(5, 10, 5, 5);
+
+    mChart.setDragDecelerationFrictionCoef(0.95f);
+
+    mChart.setCenterTextTypeface(mTfLight);
+    mChart.setCenterText(generateCenterSpannableText());
+
+    mChart.setDrawHoleEnabled(true);
+    mChart.setHoleColor(Color.WHITE);
+
+    mChart.setTransparentCircleColor(Color.WHITE);
+    mChart.setTransparentCircleAlpha(110);
+
+    mChart.setHoleRadius(58f);
+    mChart.setTransparentCircleRadius(61f);
+
+    mChart.setDrawCenterText(true);
+
+    mChart.setRotationAngle(0);
+    // enable rotation of the chart by touch
+    mChart.setRotationEnabled(true);
+    mChart.setHighlightPerTapEnabled(true);
+
+    // mChart.setUnit(" €");
+    // mChart.setDrawUnitsInChart(true);
+
+    // add a selection listener
+    mChart.setOnChartValueSelectedListener(this);
+
+    setData(3, 35);
+
+    mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+    // mChart.spin(2000, 0, 360);
+
+
+
+    Legend l = mChart.getLegend();
+    l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+    l.setXEntrySpace(7f);
+    l.setYEntrySpace(0f);
+    l.setYOffset(0f);
+
+    // entry label styling
+    mChart.setEntryLabelColor(Color.WHITE);
+    mChart.setEntryLabelTypeface(mTfRegular);
+    mChart.setEntryLabelTextSize(12f);
+
+
+    dialog.show();
+
+    /*Button declineButton = (Button) dialog.findViewById(R.id.button2);
+    // if decline button is clicked, close the custom dialog
+    declineButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Close dialog
+            dialog.dismiss();
+        }
+    });*/
+}
+
+    private SpannableString generateCenterSpannableText() {
+
+        SpannableString s = new SpannableString("Welcome John!\nTotal Customers: 35");
+        s.setSpan(new RelativeSizeSpan(1.7f), 0, 13, 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 13, s.length() - 18, 0);
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), s.length() - 19, s.length(), 0);
+        s.setSpan(new RelativeSizeSpan(.8f), s.length() - 19, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 19, s.length(), 0);
+        return s;
+    }
+
+    private void setData(int count, float range) {
+
+        float mult = range;
+
+        ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+
+        entries.add(new PieEntry(20f,"Normal"));
+        entries.add(new PieEntry(7f,"Meter Read Due"));
+        entries.add(new PieEntry(8f,"Payment Due"));
+
+
+
+        PieDataSet dataSet = new PieDataSet(entries, "Health Status");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(rgb("#437DBF"));
+        colors.add(rgb("#E71224"));
+        colors.add(rgb("#7D7D7D"));
+
+
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.WHITE);
+        data.setValueTypeface(mTfLight);
+        mChart.setData(data);
+
+        // undo all highlights
+        mChart.highlightValues(null);
+
+        mChart.invalidate();
     }
 
     private void initialView() {
@@ -161,6 +339,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
+
     }
 
     // Display anchored popup menu based on view selected
@@ -325,4 +505,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+        if (e == null)
+            return;
+        Log.i("VAL SELECTED",
+                "Value: " + e.getY() + ", index: " + h.getX()
+                        + ", DataSet index: " + h.getDataSetIndex());
+        if(h.getX()==0){
+            dialog.dismiss();
+        }else if(h.getX()==1){
+            Intent launchActivity = new Intent(this, MeterReadDueActivity.class);
+            launchActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(launchActivity);
+        }else if(h.getX()==2){
+            Intent launchActivity = new Intent(this, PaymentDueActivity.class);
+            launchActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(launchActivity);
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected() {
+
+    }
 }

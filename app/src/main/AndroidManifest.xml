@@ -44,7 +44,9 @@
             android:label="@string/title_activity_meter_read_due" />
         <activity
             android:name=".PaymentDueActivity"
-            android:label="@string/title_activity_payment_due"></activity>
+            android:label="@string/title_activity_payment_due" />
+        <activity android:name=".HealthActivity"
+            android:theme="@android:style/Theme.Dialog"></activity>
     </application>
 
 </manifest>
