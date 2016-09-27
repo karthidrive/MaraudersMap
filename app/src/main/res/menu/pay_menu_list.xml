@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_view"
+        android:icon="@mipmap/home"
+        android:title="Home"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/meter_read_dues"
+        android:icon="@mipmap/smr_icon"
+        android:title="Meter Read Due"
+        app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/send_notify_all"
+        android:icon="@mipmap/notify_icon"
+        android:title="Send Notification to All"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/send_sms_all"
+        android:icon="@mipmap/sms_icon"
+        android:title="Send SMS to All"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/map_types"
+        android:icon="@mipmap/maptypes_icon"
+        android:title="Map Types"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/show_legends"
+        android:icon="@mipmap/legend_icon"
+        android:title="Show Legends"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/cluster"
+        android:icon="@mipmap/cluster_icon"
+        android:title="Clustering"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/about"
+        android:icon="@mipmap/about_icon"
+        android:title="About"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/logout"
+        android:icon="@mipmap/logout_icon"
+        android:title="Logout"
+        app:showAsAction="always|withText" />
+</menu>

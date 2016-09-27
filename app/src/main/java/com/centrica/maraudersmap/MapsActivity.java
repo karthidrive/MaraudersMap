@@ -255,14 +255,97 @@ private void showDialog(){
         mMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
                 .position(home1));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home1, 15f));
 
 
-        LatLng home2 = new LatLng(51.483201, -0.156860);
+
+        LatLng home11 = new LatLng(51.506171, -0.153517);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home11));
+
+        LatLng home12 = new LatLng(51.580049, -0.074896);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home12));
+
+        LatLng home13 = new LatLng(51.559350, -0.104894);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home13));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home1, 15f));
+
+        LatLng home14 = new LatLng(51.488819, -0.167829);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home14));
+
+
+        LatLng home15 = new LatLng(51.491029, -0.172854);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home15));
+
+        LatLng home16 = new LatLng(51.490535, -0.177714);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home16));
+
+        LatLng home17 = new LatLng(51.493682, -0.154332);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home17));
+
+
+        LatLng home18 = new LatLng(51.494317, -0.149558);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home18));
+
+        LatLng home19 = new LatLng(51.497632, -0.153300);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.home_icon))
+                .position(home19));
+
+        LatLng home2 = new LatLng(51.484898, -0.159317);
         mMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
                 .position(home2));
        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home2, 15f));
+
+        LatLng home21 = new LatLng( 51.498044, -0.143009);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
+                .position(home21));
+
+        LatLng home22 = new LatLng(51.492245, -0.156045);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
+                .position(home22));
+
+
+        LatLng home23 = new LatLng(51.514043, -0.180078);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
+                .position(home23));
+
+
+        LatLng home24 = new LatLng(51.526647, -0.087381);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
+                .position(home24));
+
+
+        LatLng home25 = new LatLng( 51.536738, -0.075536);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
+                .position(home25));
+
+
+        LatLng home26 = new LatLng(  51.535639, -0.080387);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.red_home))
+                .position(home26));
+
 
 
         LatLng home3 = new LatLng(51.383201, -0.166860);
@@ -272,10 +355,48 @@ private void showDialog(){
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home3, 15f));
 
 
+        LatLng home31 = new LatLng(51.487537, -0.158158);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
+                .position(home31));
+
+
+        LatLng home32 = new LatLng(51.492224, -0.168532);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
+                .position(home32));
+
+
+        LatLng home34 = new LatLng(51.503552, -0.218829);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
+                .position(home34));
+
+        LatLng home35 = new LatLng(51.577141, -0.294424);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
+                .position(home35));
+
+        LatLng home36 = new LatLng(51.577141, -0.294424);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
+                .position(home36));
+
+        LatLng home37 = new LatLng(51.577778, -0.349005);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pay_home))
+                .position(home37));
+
         LatLng home4 = new LatLng(51.491597, -0.150766);
         mMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.user_icon))
                 .position(home4));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home4, 15f));
+
+        LatLng home41 = new LatLng(51.513258, -0.221554);
+        mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.user_icon))
+                .position(home41));
 
         // Setting a custom info window adapter for the google map
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
